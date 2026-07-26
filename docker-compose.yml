@@ -1,0 +1,18 @@
+version: '3.8'
+
+services:
+  instazoo_postgres:
+    image: postgres:latest
+    container_name: instazoo_postgres_db
+    environment:
+      POSTGRES_USER: ${DB_USER}
+      POSTGRES_PASSWORD: ${DB_PASSWORD}
+      POSTGRES_DB: ${DB_NAME}
+    ports:
+      - "5433:5432"
+    volumes:
+      - instazoo_db_data:/var/lib/postgresql/data
+    restart: always
+
+volumes:
+  instazoo_db_data:
