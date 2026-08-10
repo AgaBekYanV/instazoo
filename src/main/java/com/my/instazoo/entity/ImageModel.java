@@ -19,7 +19,7 @@ public class ImageModel {
     String name;
 
     @Lob
-    @Column(columnDefinition = "LONGBLOB")
+    @Column(columnDefinition = "bytea")
     byte[] imageBytes;
 
     @JsonIgnore

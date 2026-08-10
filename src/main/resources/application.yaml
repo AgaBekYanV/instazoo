@@ -11,3 +11,8 @@ spring:
     hibernate:
       ddl-auto: update
     show-sql: true
+
+app:
+  jwt:
+    # Ищет переменную окружения JWT_EXPIRATION, если её нет — берет 600000
+    expiration-time: ${JWT_EXPIRATION:600000}
