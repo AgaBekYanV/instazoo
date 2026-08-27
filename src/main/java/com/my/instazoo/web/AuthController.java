@@ -8,7 +8,6 @@ import com.my.instazoo.security.JWTTokenProvider;
 import com.my.instazoo.security.SecurityConstants;
 import com.my.instazoo.service.UserService;
 import com.my.instazoo.validations.ResponseErrorValidator;
-import io.jsonwebtoken.lang.Objects;
 import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
@@ -17,6 +16,7 @@ import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
+import org.springframework.util.ObjectUtils;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
 
@@ -41,7 +41,7 @@ public class AuthController {
     @PostMapping("/signin")
     public ResponseEntity<Object> authenticateUser(@Valid @RequestBody LoginRequest loginRequest, BindingResult bindingResult) {
         ResponseEntity<Object> errors = responseErrorValidator.mapValidationService(bindingResult);
-        if(!Objects.isEmpty(errors)) return errors;
+        if(!ObjectUtils.isEmpty(errors)) return errors;
 
         Authentication authentication = authenticationManager.authenticate(new UsernamePasswordAuthenticationToken(
                 loginRequest.getUsername(),
@@ -60,7 +60,7 @@ public class AuthController {
     @PostMapping("/signup")
     public ResponseEntity<Object> registerUser(@Valid @RequestBody SignupRequest signupRequest, BindingResult bindingResult) {
         ResponseEntity<Object> errors = responseErrorValidator.mapValidationService(bindingResult);
-        if(!Objects.isEmpty(errors)) return errors;
+        if(!ObjectUtils.isEmpty(errors)) return errors;
 
         userService.createUser(signupRequest);
         return ResponseEntity.ok(new MessageResponse("User registered successfully"));
