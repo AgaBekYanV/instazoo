@@ -9,10 +9,12 @@ import { authInterceptorProviders } from './helper/auth-interceptor';
 import { authErrorInterceptorProvider } from './helper/error-interceptor';
 import { Login } from './auth/login/login';
 import { Register } from './auth/register/register';
+import {MatButtonModule} from '@angular/material/button';
 
 @NgModule({
   declarations: [App, Login, Register],
-  imports: [BrowserModule, AppRoutingModule, MaterialModule, ReactiveFormsModule, FormsModule],
+  imports: [BrowserModule, AppRoutingModule, MaterialModule, ReactiveFormsModule,
+    FormsModule,  MatButtonModule],
   providers: [
     provideBrowserGlobalErrorListeners(),
     provideHttpClient(),
