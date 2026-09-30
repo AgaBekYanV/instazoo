@@ -1,2 +1,15 @@
 /* You can add global styles to this file, and also import other style files */
 @import '@angular/material/prebuilt-themes/indigo-pink.css';
+
+#regButton{
+  width: 20%;
+}
+
+#logButton{
+  width: 20%;
+}
+
+#navMainLink{
+  cursor: pointer;
+  margin-left: 20px;
+}

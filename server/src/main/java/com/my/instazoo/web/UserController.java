@@ -3,6 +3,7 @@ package com.my.instazoo.web;
 import com.my.instazoo.dto.UserDTO;
 import com.my.instazoo.entity.User;
 import com.my.instazoo.facade.UserFacade;
+import com.my.instazoo.payload.response.MessageResponse;
 import com.my.instazoo.service.UserService;
 import com.my.instazoo.validations.ResponseErrorValidator;
 import jakarta.validation.Valid;
@@ -39,7 +40,7 @@ public class UserController {
         return new ResponseEntity<>(userDTO, HttpStatus.OK);
     }
 
-    @GetMapping("{userId}")
+    @GetMapping("/{userId}")
     public ResponseEntity<UserDTO> getUserProfile(@PathVariable("userId") String userId) {
         User user = userService.getUserById(Long.parseLong(userId));
         UserDTO userDTO = userFacade.userToUserDTO(user);
@@ -60,5 +61,13 @@ public class UserController {
         UserDTO userUpdated = userFacade.userToUserDTO(user);
         return new ResponseEntity<>(userUpdated, HttpStatus.OK);
 
+    }
+
+    @DeleteMapping("/{userId}/delete")
+    public ResponseEntity<MessageResponse> deleteUserById(@PathVariable("userId") String userId, Principal principal) {
+        log.info("In deleteUserById");
+        Long id = Long.parseLong(userId);
+        userService.deleteUserById(principal);
+        return new ResponseEntity<>(new MessageResponse("User was deleted successfully"), HttpStatus.OK);
     }
 }

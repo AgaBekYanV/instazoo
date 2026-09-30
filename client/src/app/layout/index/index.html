@@ -1,0 +1,64 @@
+@if (isPostsLoaded && isUserDataLoaded) {
+  <div class="index-page">
+    @for (post of posts; track $index; let i = $index) {
+      <mat-card class="post-card">
+        <mat-card-header>
+          <div mat-card-avatar class="example-header-image"></div>
+          <mat-card-title>{{ post.title }}</mat-card-title>
+          <mat-card-subtitle>{{ post.location }}</mat-card-subtitle>
+        </mat-card-header>
+
+        @if (post.image) {
+          <img class="post-image" mat-card-image [src]="formatImage(post.image)" alt="post image">
+        }
+
+        <mat-card-subtitle>Posted by {{ post.username }}</mat-card-subtitle>
+
+        <mat-card-content>
+          <p>{{ post.caption }}</p>
+        </mat-card-content>
+
+        <mat-card-actions>
+          @if (post.id !== undefined) {
+            <button
+              mat-button
+              (click)="likePost(post.id, i)"
+              [ngClass]="getLikeClass(post)">
+              <mat-icon>favorite</mat-icon> Like
+            </button>
+          }
+        </mat-card-actions>
+
+        <div>
+          @if (post.comments && post.comments.length > 0) {
+            @for (comment of post.comments; track $index) {
+              <p>
+                <span class="comment-username">{{ comment.username }}</span>:
+                {{ comment.message }}
+              </p>
+            }
+          }
+        </div>
+
+        @if (post.id !== undefined) {
+          <mat-form-field class="w-100 comments-section">
+            <mat-label>Leave a comment...</mat-label>
+            <input
+              #message
+              matInput
+              maxlength="128"
+              (keyup.enter)="postComment(message.value, post.id!, i); message.value = ''">
+            <mat-hint align="end">{{ message.value.length }} / 128</mat-hint>
+          </mat-form-field>
+        }
+      </mat-card>
+    } @empty {
+      <p class="no-posts">No posts available</p>
+    }
+  </div>
+} @else {
+  <div class="loading-container">
+    <mat-spinner></mat-spinner>
+    <p>Loading...</p>
+  </div>
+}

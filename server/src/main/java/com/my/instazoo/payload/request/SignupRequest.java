@@ -28,6 +28,8 @@ public class SignupRequest {
     @NotEmpty(message = "Please enter your username")
     String username;
 
+    String bio;
+
 
     String password;
     String confirmPassword;

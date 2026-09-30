@@ -1,1 +1,76 @@
-<p>register works!</p>
+<div class="login-page">
+  <h2>Register</h2>
+  <p>Already have an account? <a routerLink="/login">Sign in</a></p>
+  <form [formGroup]="registerForm">
+    <div>
+      <div class="justify-content-center">
+        <div></div>
+        <mat-form-field appearance="outline">
+          <mat-label>Name</mat-label>
+          <input matInput
+                 formControlName="firstname">
+        </mat-form-field>
+      </div>
+      <div class="justify-content-center">
+        <div></div>
+        <mat-form-field appearance="outline">
+          <mat-label>Username</mat-label>
+          <input matInput
+                 formControlName="username">
+        </mat-form-field>
+      </div>
+      <div class="justify-content-center">
+        <div></div>
+        <mat-form-field appearance="outline">
+          <mat-label>Lastname</mat-label>
+          <input matInput
+                 formControlName="lastname">
+        </mat-form-field>
+      </div>
+      <div class="justify-content-center">
+        <div></div>
+        <mat-form-field appearance="outline">
+          <mat-label>Email Address</mat-label>
+          <input matInput
+                 formControlName="email">
+        </mat-form-field>
+      </div>
+      <div class="justify-content-center">
+        <div></div>
+        <mat-form-field appearance="outline">
+          <mat-label>Bio</mat-label>
+          <input matInput
+                 formControlName="bio">
+        </mat-form-field>
+      </div>
+      <div>
+        <mat-form-field appearance="outline">
+          <mat-label>Password</mat-label>
+          <input matInput [type]="hide ? 'password' : 'text'"
+                 formControlName="password">
+          <button mat-icon-button matSuffix (click)="hide = !hide" [attr.aria-label]="'Hide password'" [attr.aria-pressed]="hide">
+            <mat-icon>{{hide ? 'visibility_off' : 'visibility'}}</mat-icon>
+          </button>
+        </mat-form-field>
+      </div>
+      <div>
+        <mat-form-field appearance="outline">
+          <mat-label>Confirm Password</mat-label>
+          <input matInput [type]="hide ? 'password' : 'text'"
+                 formControlName="confirmPassword">
+          <button mat-icon-button matSuffix (click)="hide = !hide" [attr.aria-label]="'Hide password'" [attr.aria-pressed]="hide">
+            <mat-icon>{{hide ? 'visibility_off' : 'visibility'}}</mat-icon>
+          </button>
+        </mat-form-field>
+      </div>
+
+      <div id="controls" class="row">
+        <button id="regButton" matButton="filled" [disabled]="registerForm.invalid" (click)="submit()" mat-flat-button color="primary">
+          Register
+        </button>
+
+<!--        <a matButton="elevated" >Login</a>-->
+      </div>
+    </div>
+  </form>
+</div>

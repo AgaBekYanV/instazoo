@@ -1,7 +1,14 @@
 import {Injectable} from '@angular/core';
-import {HTTP_INTERCEPTORS, HttpEvent, HttpHandler, HttpInterceptor, HttpRequest} from '@angular/common/http';
+import {
+  HTTP_INTERCEPTORS,
+  HttpErrorResponse,
+  HttpEvent,
+  HttpHandler,
+  HttpInterceptor,
+  HttpRequest
+} from '@angular/common/http';
 import {TokenStorage} from '../service/token-storage';
-import {Observable} from "rxjs";
+import {catchError, Observable, throwError} from "rxjs";
 
 const TOKEN_HEADER_KEY = 'Authorization';
 
@@ -15,11 +22,23 @@ export class AuthInterceptor implements HttpInterceptor {
 
   intercept(req: HttpRequest<any>, next: HttpHandler): Observable<HttpEvent<any>> {
         let authRequest = req;
-        const token = this.tokenService.grtToken();
+        const token = this.tokenService.getToken();
         if(token != null){
-          authRequest = req.clone({headers: req.headers.set(TOKEN_HEADER_KEY, token)});
+          authRequest = req.clone({
+            setHeaders: {Authorization: `${token}` }
+          });
         }
-        return next.handle(authRequest);
+        return next.handle(authRequest).pipe(
+          catchError((error: HttpErrorResponse) => {
+            if (error.status === 401) {
+              this.tokenService.logOut();
+              window.location.reload();
+            }
+            const errorMsg = error.error?.error || error.error?.message || error.statusText;
+            console.error('Interceptor caught error:', errorMsg);
+            return throwError(() => new Error(errorMsg));
+          })
+        );
   }
 }
 export const authInterceptorProviders = [

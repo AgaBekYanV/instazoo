@@ -16,7 +16,7 @@ export class TokenStorage {
     window.sessionStorage.setItem(TOKEN_KEY, token);
   }
 
-  public grtToken(): string | null{
+  public getToken(): string | null{
     return sessionStorage.getItem(TOKEN_KEY);
   }
 
@@ -26,7 +26,7 @@ export class TokenStorage {
   }
 
   public getUser(): any {
-    const userJson = sessionStorage.getItem(USER_KEY);
+    const userJson = window.sessionStorage.getItem(USER_KEY);
     return userJson ? JSON.parse(userJson) : null;
   }
 

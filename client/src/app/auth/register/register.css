@@ -1,0 +1,34 @@
+.login-page {
+  text-align: center;
+  margin-top: 10rem;
+}
+
+#controls {
+  display: block;
+  margin: 0 auto;
+  width: 40%;
+}
+
+#controls button {
+  margin: 10px;
+}
+
+mat-form-field {
+  width: 50%;
+}
+
+mat-form-field input {
+  margin: 5px;
+}
+
+h2 {
+  font-family: 'Inter', sans-serif;
+  font-size: 28px;
+  font-weight: 600;
+  color: #1a1a1a;
+  text-align: center;
+  letter-spacing: -0.5px;
+  margin-bottom: 24px;
+}
+
+

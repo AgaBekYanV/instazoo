@@ -18,10 +18,17 @@ public class JWTAuthenticationEntryPoint implements AuthenticationEntryPoint {
 
     @Override
     public void commence(HttpServletRequest request, HttpServletResponse response, AuthenticationException authException) throws IOException, ServletException {
-        InvalidLoginResponse loginResponse = new InvalidLoginResponse();
+     /*   InvalidLoginResponse loginResponse = new InvalidLoginResponse();
         String jsonLoginResponse = new Gson().toJson(loginResponse);
         response.setContentType(SecurityConstants.CONTENT_TYPE);
         response.setStatus(HttpStatus.UNAUTHORIZED.value());
-        response.getWriter().println(jsonLoginResponse);
+        response.getWriter().println(jsonLoginResponse);*/
+
+        response.setContentType("application/json");
+        response.setStatus(HttpStatus.UNAUTHORIZED.value());
+
+        String errorMessage = authException.getMessage() != null ? authException.getMessage() : "Unauthorized";
+        String jsonResponse = String.format("{\"error\": \"%s\"}", errorMessage);
+        response.getWriter().write(jsonResponse);
     }
 }

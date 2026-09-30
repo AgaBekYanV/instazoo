@@ -5,9 +5,12 @@ import com.my.instazoo.entity.User;
 import com.my.instazoo.entity.enums.ERole;
 import com.my.instazoo.exception.UserExistException;
 import com.my.instazoo.payload.request.SignupRequest;
+import com.my.instazoo.payload.response.MessageResponse;
 import com.my.instazoo.repository.UserRepository;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
@@ -35,6 +38,7 @@ public class UserService {
         user.setLastname(userIn.getLastname());
         user.setUsername(userIn.getUsername());
         user.setPassword(passwordEncoder.encode(userIn.getPassword()));
+        user.setBio(userIn.getBio());
         user.getRoles().add(ERole.ROLE_USER);
 
         try{
@@ -68,5 +72,10 @@ public class UserService {
 
     public User getUserById(Long id) {
         return userRepository.findById(id).orElseThrow(()-> new UsernameNotFoundException("User not found with id: " + id));
+    }
+
+    public void deleteUserById(Principal principal) {
+        User user = getUserByPrincipal(principal);
+        userRepository.delete(user);
     }
 }
