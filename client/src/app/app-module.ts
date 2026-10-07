@@ -3,7 +3,7 @@ import { BrowserModule } from '@angular/platform-browser';
 import { AppRoutingModule } from './app-routing-module';
 import { App } from './app';
 import { MaterialModule } from './material-module';
-import {provideHttpClient, withInterceptorsFromDi} from '@angular/common/http';
+import { provideHttpClient, withInterceptorsFromDi } from '@angular/common/http';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { authInterceptorProviders } from './helper/auth-interceptor';
 import { authErrorInterceptorProvider } from './helper/error-interceptor';
@@ -16,10 +16,14 @@ import { MatFormFieldModule } from '@angular/material/form-field';
 import { Navigation } from './layout/navigation/navigation';
 import { MatTooltip } from '@angular/material/tooltip';
 import { Index } from './layout/index/index';
-import {MatProgressSpinnerModule} from '@angular/material/progress-spinner';
+import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
+import { Profile } from './user/profile/profile';
+import { Posts } from './user/posts/posts';
+import { EditUser } from './user/edit-user/edit-user';
+import { AddPost } from './user/add-post/add-post';
 
 @NgModule({
-  declarations: [App, Login, Register, Navigation, Index],
+  declarations: [App, Login, Register, Navigation, Index, Profile, Posts, EditUser, AddPost],
   imports: [
     BrowserModule,
     AppRoutingModule,
@@ -37,7 +41,7 @@ import {MatProgressSpinnerModule} from '@angular/material/progress-spinner';
     provideBrowserGlobalErrorListeners(),
     provideHttpClient(withInterceptorsFromDi()),
     authInterceptorProviders,
-    authErrorInterceptorProvider
+    authErrorInterceptorProvider,
   ],
   bootstrap: [App],
 })

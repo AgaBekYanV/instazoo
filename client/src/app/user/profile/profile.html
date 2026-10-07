@@ -1,0 +1,43 @@
+@if (user) {
+  <div class="user-profile">
+    <h1>Profile</h1>
+    <div style="text-align: right">
+      <button mat-flat-button color="primary" (click)="openEditDialog()">Edit Info</button>
+    </div>
+
+    <div style="padding-top: 2rem" class="row">
+      <div class="col">
+        <!-- ИСПРАВЛЕНО: Убрана лишняя сложность. formatImage теперь надежно обрабатывает null -->
+        <img class="profile-image"
+             [src]="previewImageURL || formatImage(userProfileImage) || 'https://media.istockphoto.com/id/1005374612/ru/%D0%B2%D0%B5%D0%BA%D1%82%D0%BE%D1%80%D0%BD%D0%B0%D1%8F/%D0%BB%D0%BE%D0%B3%D0%BE%D1%82%D0%B8%D0%BF-%D0%B7%D0%BD%D0%B0%D1%87%D0%BA%D0%B0-%D1%81%D0%BE%D0%B1%D0%B0%D1%87%D1%8C%D0%B5%D0%B9-%D0%BB%D0%B0%D0%BF%D1%8B.jpg?s=612x612&w=0&k=20&c=EOk9va2I7YSR7PkvtiIKEj5CWRj5FAS1nDVX4qBmzHg='"
+             alt="user image">
+
+        <input type="file"
+               style="display: none"
+               #fileInput
+               (change)="onFileSelected($event)">
+
+        <button mat-button (click)="fileInput.click()">Pick File</button>
+
+        @if (selectedFile) {
+          <button mat-button color="primary" (click)="onUpload()">Upload</button>
+        }
+      </div>
+
+      <div class="col" style="text-align: left">
+        <h2>{{ user.username }}</h2>
+        <h3 style="font-style: italic">{{ user.firstname }} {{ user.lastname }}</h3>
+        <p>{{ user.bio }}</p>
+      </div>
+
+      <mat-divider style="margin: 2rem 0"></mat-divider>
+
+      <router-outlet></router-outlet>
+    </div>
+  </div>
+} @else {
+  <!-- Этот блок покажется, пока данные грузятся или если произошла ошибка -->
+  <div style="text-align: center; padding: 2rem;">
+    <p>Загрузка профиля...</p>
+  </div>
+}

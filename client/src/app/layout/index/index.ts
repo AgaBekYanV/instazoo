@@ -39,7 +39,7 @@ export class Index implements OnInit {
   private loadPosts(): void {
     this.postService.getAllPosts().subscribe({
       next: (data) => {
-        console.log('Posts loaded:', data);
+        //console.log('Posts loaded:', data);
         this.posts = data ?? [];
 
         // Загружаем картинки и комментарии для всех постов
@@ -71,7 +71,7 @@ export class Index implements OnInit {
       this.cd.detectChanges();
       return;
     }
-    console.log('Внутри loadPostDetails');
+    //console.log('Внутри loadPostDetails');
 
     // Загружаем картинки и комментарии параллельно для каждого поста
     const detailRequests = posts.map(post => {
@@ -83,7 +83,7 @@ export class Index implements OnInit {
         ? this.commentService.getCommentsToPost(post.id)
         : null;
 
-      console.log('Прошол запросы коментов и картинки');
+      //console.log('Прошол запросы коментов и картинки');
 
       return forkJoin({
         image: imageReq ?? [null],
