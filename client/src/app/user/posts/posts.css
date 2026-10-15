@@ -1,0 +1,62 @@
+.user-posts-container {
+  padding: 1rem;
+  max-width: 800px;
+  margin: 0 auto;
+}
+
+.header-actions {
+  text-align: right;
+  margin-bottom: 1rem;
+}
+
+.posts-count {
+  color: #3f51b5;
+margin-bottom: 1.5rem;
+  font-weight: 400;
+}
+
+.post-card {
+  margin-bottom: 1.5rem;
+}
+
+.comments-section {
+  padding: 0 16px 16px;
+  text-align: left;
+}
+
+.comment-item {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin: 8px 0;
+  padding: 4px 0;
+  border-bottom: 1px solid #f0f0f0;
+
+  &:last-child {
+    border-bottom: none;
+  }
+}
+
+.comment-username {
+  font-weight: 500;
+  color: #212121;
+}
+
+.actions-end {
+  display: flex;
+  justify-content: flex-end;
+padding: 8px;
+}
+
+.likes-info {
+  text-align: start;
+padding: 0 16px 16px;
+  color: #757575;
+}
+
+.no-posts {
+  text-align: center;
+  color: #757575;
+  margin-top: 3rem;
+  font-size: 1.1rem;
+}

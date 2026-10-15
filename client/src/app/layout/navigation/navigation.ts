@@ -29,7 +29,7 @@ export class Navigation implements OnInit {
             .subscribe(data=>{
               this.user = data;
               this.isDataLoaded = true;
-            })
+            });
         }
     }
 

@@ -57,7 +57,7 @@ export class Index implements OnInit {
       next: (data) => {
         this.user = data;
         this.isUserDataLoaded = true;
-        this.cd.detectChanges();  // ← явный change detection
+        this.cd.detectChanges();  // явный change detection
       },
       error: (err) => {
         console.error('Failed to load user:', err);
@@ -108,7 +108,6 @@ export class Index implements OnInit {
         this.cd.detectChanges();
       },
       error: (err) => {
-        console.log('Внутри forkJoin error');
         console.error('Failed to load post details:', err);
         this.isPostsLoaded = true;
         this.cd.detectChanges();

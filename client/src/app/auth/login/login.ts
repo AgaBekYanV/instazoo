@@ -43,16 +43,10 @@ export class Login implements  OnInit{
         password: this.loginForm.value.password
       }).subscribe({
         next: (data) => {
-          // console.log('=== ПОЛНЫЙ ОТВЕТ ОТ БЭКЕНДА ===');
-          // console.log(JSON.stringify(data, null, 2));
-          // console.log('data.token:', data.token);
-          // console.log('data.accessToken:', data.accessToken);
-          // console.log(data);
 
           this.tokenStorage.saveToken(data.token);
           this.tokenStorage.saveUser((data));
 
-          //console.log('Token after save:', this.tokenStorage.getToken());
           console.log('User after save:', this.tokenStorage.getUser());
 
           this.notificationService.showSnack('Successfully logged in');

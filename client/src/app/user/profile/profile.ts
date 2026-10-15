@@ -39,6 +39,7 @@ export class Profile implements OnInit {
   }
 
   private loadUser() {
+    console.log("user до subscribe" + this.userService.getCurrentUser());
     this.userService.getCurrentUser().subscribe({
       next: (data) => {
         this.user = data;
@@ -50,7 +51,8 @@ export class Profile implements OnInit {
         this.cd.detectChanges();
       }
     });
-    console.log(this.user);
+    console.log("Содержисое data: " + this.user);
+    console.log("Вот такой вот юзер: " + this.user);
   }
 
   private loadProfileImage() {
@@ -59,6 +61,8 @@ export class Profile implements OnInit {
         // Безопасное извлечение с проверкой на null/undefined
         this.userProfileImage = data?.imageBytes || null;
         this.cd.detectChanges();
+        console.log(data);
+        console.log("this.userProfileImage: " + this.userProfileImage);
       },
       error: (err) => {
         console.log('У пользователя нет картинки или ошибка загрузки:', err);
@@ -86,6 +90,7 @@ export class Profile implements OnInit {
 
     const dialogUserEditConfig = new MatDialogConfig();
     dialogUserEditConfig.width = '400px';
+    dialogUserEditConfig.height = '400px';
     dialogUserEditConfig.data = { user: this.user };
 
     const dialogRef = this.dialog.open(EditUser, dialogUserEditConfig);

@@ -1,1 +1,48 @@
-<p>add-post works!</p>
+<div class="create-post-container">
+  <div class="header-actions">
+    <button mat-flat-button color="primary" routerLink="/profile">My Posts</button>
+  </div>
+
+  <h2>Create Post</h2>
+
+  <form [formGroup]="postForm" class="post-form">
+
+    <div class="image-section">
+      <img class="post-image" [src]="previewImgURL || '/profile-image.jpg'" alt="post image">
+
+      <input type="file"
+             style="display: none"
+             #fileInput
+             (change)="onFileSelected($event)">
+
+      <button mat-stroked-button color="primary" (click)="fileInput.click()">
+        <mat-icon>cloud_upload</mat-icon>
+        Pick File
+      </button>
+    </div>
+
+    <div class="form-fields">
+      <mat-form-field appearance="outline" class="full-width">
+        <mat-label>Title</mat-label>
+        <input matInput formControlName="title">
+      </mat-form-field>
+
+      <mat-form-field appearance="outline" class="full-width">
+        <mat-label>Caption</mat-label>
+        <textarea matInput formControlName="caption" rows="3"></textarea>
+      </mat-form-field>
+
+      <mat-form-field appearance="outline" class="full-width">
+        <mat-label>Location</mat-label>
+        <input matInput formControlName="location">
+      </mat-form-field>
+    </div>
+
+    <div class="form-actions">
+      <button mat-flat-button color="primary" [disabled]="postForm.invalid" (click)="submit()">
+        Create Post
+      </button>
+    </div>
+
+  </form>
+</div>

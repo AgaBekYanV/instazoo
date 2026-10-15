@@ -1,1 +1,67 @@
-<p>posts works!</p>
+@if (isUserPostsLoaded) {
+  <div class="user-posts-container">
+
+    <div class="header-actions">
+      <button mat-flat-button color="primary" routerLink="/profile/add">
+        <mat-icon>add</mat-icon> Add Post
+      </button>
+    </div>
+
+    <h2 class="posts-count">{{ posts.length }} Posts</h2>
+
+    @for (post of posts; track post.id; let i = $index) {
+      <mat-card class="post-card">
+        <mat-card-header>
+          <div mat-card-avatar class="example-header-image"></div>
+          <mat-card-title>{{ post.title }}</mat-card-title>
+          <mat-card-subtitle>{{ post.location }}</mat-card-subtitle>
+        </mat-card-header>
+
+        <img mat-card-image [src]="formatImage(post.image)" alt="post image">
+
+        <mat-card-content>
+          <p>{{ post.caption }}</p>
+        </mat-card-content>
+
+        <!-- Безопасный вывод комментариев -->
+        @if (post.comments && post.comments.length > 0) {
+          <div class="comments-section">
+            @for (comment of post.comments; track comment.id; let c = $index) {
+              <div class="comment-item">
+                <span>
+                  <span class="comment-username">{{ comment.username }}</span>:
+                  {{ comment.message }}
+                </span>
+                <button
+                  mat-icon-button
+                  color="accent"
+                  matTooltip="Delete comment"
+                  (click)="deleteComment(comment.id!, i, c)">
+                  <mat-icon>clear</mat-icon>
+                </button>
+              </div>
+            }
+          </div>
+        }
+
+        <mat-card-actions class="actions-end">
+          <button mat-button color="warn" (click)="removePost(post, i)">
+            <mat-icon>delete</mat-icon>
+            Remove Post
+          </button>
+        </mat-card-actions>
+
+        <mat-card-subtitle class="likes-info">
+          Likes: {{ post.likes || 0 }}
+          @if (post.likes && post.likes > 0 && post.usersLiked) {
+            <!-- .join(', ') делает красивый список: "by user1, user2" -->
+            <span>by {{ post.usersLiked.join(', ') }}</span>
+          }
+        </mat-card-subtitle>
+      </mat-card>
+    } @empty {
+      <p class="no-posts">You haven't created any posts yet.</p>
+    }
+  </div>
+}
+

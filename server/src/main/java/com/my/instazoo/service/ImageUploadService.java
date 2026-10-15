@@ -43,8 +43,9 @@ public class ImageUploadService {
     public ImageModel uploadImageToUser(MultipartFile file, Principal principal) throws IOException{
         User user = getUserByPrincipal(principal);
         log.info("Uploading image profile to User {}:",  user.getUsername());
+        System.out.println(user.getId());
 
-        ImageModel userProfileImage = imageModelRepository.findByUserId(user.getId()).orElse(null);
+        ImageModel userProfileImage = imageModelRepository.findByUserIdAndPostIdIsNull(user.getId()).orElse(null);
         if(!ObjectUtils.isEmpty(userProfileImage)){
             imageModelRepository.delete(userProfileImage);
         }
@@ -53,7 +54,9 @@ public class ImageUploadService {
         imageModel.setUserId(user.getId());
         imageModel.setImageBytes(compressBytes(file.getBytes()));
         imageModel.setName(file.getOriginalFilename());
-        return imageModelRepository.save(imageModel);
+        ImageModel result = imageModelRepository.save(imageModel);
+        System.out.println(result.getUserId());
+        return result;
     }
 
     public ImageModel uploadImageToPost(MultipartFile file, Principal principal, Long postId) throws IOException{
@@ -74,7 +77,7 @@ public class ImageUploadService {
 
     public ImageModel getImageToUser(Principal principal){
         User user = getUserByPrincipal(principal);
-        ImageModel userProfileImage = imageModelRepository.findByUserId(user.getId()).orElse(null);
+        ImageModel userProfileImage = imageModelRepository.findByUserIdAndPostIdIsNull(user.getId()).orElse(null);
         if(!ObjectUtils.isEmpty(userProfileImage)){
             userProfileImage.setImageBytes(decompressBytes(userProfileImage.getImageBytes()));
         }

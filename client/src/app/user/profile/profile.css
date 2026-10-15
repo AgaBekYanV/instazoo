@@ -1,0 +1,151 @@
+.user-profile {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 2rem;
+  background-color: #fafafa;
+  min-height: 100vh;
+}
+
+h1 {
+  color: #3f51b5;
+font-weight: 300;
+  margin-bottom: 1.5rem;
+  font-size: 2.5rem;
+}
+
+.edit-button-container {
+  text-align: right;
+  margin-bottom: 1rem;
+}
+
+.profile-content {
+  padding-top: 2rem;
+  display: flex;
+  gap: 3rem;
+  align-items: flex-start;
+  flex-wrap: wrap;
+}
+
+.col {
+  flex: 1;
+  min-width: 300px;
+}
+
+
+   .col:first-child {
+     display: flex;
+     flex-direction: column;
+     align-items: center;
+     gap: 1rem;
+   }
+
+.profile-image {
+  width: 200px;
+  height: 200px;
+  border-radius: 50%;
+  object-fit: cover;
+  border: 4px solid #3f51b5;
+  box-shadow: 0 4px 12px rgba(63, 81, 181, 0.2);
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+  background-color: #e0e0e0;
+
+  &:hover {
+    transform: scale(1.05);
+    box-shadow: 0 6px 16px rgba(63, 81, 181, 0.3);
+  }
+}
+
+.file-input {
+  display: none;
+}
+
+.file-buttons {
+  display: flex;
+  gap: 0.5rem;
+  flex-wrap: wrap;
+  justify-content: center;
+}
+
+
+   .col:last-child {
+     text-align: left;
+     padding: 1.5rem;
+     background-color: white;
+     border-radius: 8px;
+     box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+   }
+
+h2 {
+  color: #212121;
+  font-weight: 400;
+  margin-bottom: 0.5rem;
+  font-size: 2rem;
+}
+
+h3 {
+  color: #757575;
+  font-weight: 300;
+  margin-bottom: 1rem;
+  font-size: 1.3rem;
+}
+
+p {
+  color: #424242;
+  line-height: 1.6;
+  font-size: 1rem;
+  margin-top: 1rem;
+}
+
+.divider {
+  margin: 2rem 0;
+  width: 100%;
+}
+
+
+   .loadingProfile {
+     display: flex;
+     justify-content: center;
+     align-items: center;
+     min-height: 100vh;
+     background-color: #fafafa;
+
+     p {
+       font-size: 1.2rem;
+       color: #757575;
+       font-weight: 300;
+     }
+   }
+
+
+@media (max-width: 768px) {
+  .user-profile {
+    padding: 1rem;
+  }
+
+  .profile-content {
+    flex-direction: column;
+    gap: 2rem;
+  }
+
+  .profile-image {
+    width: 150px;
+    height: 150px;
+  }
+
+  h1 {
+    font-size: 2rem;
+  }
+
+  h2 {
+    font-size: 1.5rem;
+  }
+}
+
+
+   button {
+     transition: all 0.3s ease;
+
+     &:hover {
+       transform: translateY(-2px);
+     }
+   }

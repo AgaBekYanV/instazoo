@@ -32,3 +32,6 @@
   display: block;       /* Убирает небольшой нижний отступ, который есть у inline-элементов (img по умолчанию inline) */
   object-fit: contain;
 }
+.comment-username {
+  font-weight: bold;
+}
